@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <style>
+            table {
+            border-collapse: collapse;
+            width: 100%;
+            }
+
+            td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+            tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+            #weather {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Weather</th>
+                <th>Wind</th>
+            </tr>
+            {% for item in data["list"] %}
+                <tr>
+                    <td>{{ item["dt_txt"] }}</td>
+                    <td>High: {{ item["main"]["temp_max"] }}°F Low: {{ item["main"]["temp_min"] }}°F</td>
+                    <td>{{ item["main"]["humidity"] }}%</td>
+                    <td><div id="weather"><img src="https://openweathermap.org/img/w/{{ item["weather"][0]["icon"] }}.png"></img> {{ item["weather"][0]["main"] }}</div></td>
+                    <td>{{ '%.2f' % (item["wind"]["speed"]*3.6) }} mph</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
