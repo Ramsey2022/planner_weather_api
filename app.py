@@ -34,6 +34,7 @@ def get_weather():
     data["q"] = request.args.get("city", "state")
     data["appid"] = os.getenv("WEATHER_API_KEY")
     data["units"] = "imperial"
+    data["exclude"] = ("current", "minutely", "hourly", "alerts")
 
     url_values = urllib.parse.urlencode(data)
     url = "https://api.openweathermap.org/data/2.5/forecast"
