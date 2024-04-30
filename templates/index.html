@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>{{ title }}</title>
@@ -33,13 +34,13 @@
                 <th>Weather</th>
                 <th>Wind</th>
             </tr>
-            {% for item in data["list"] %}
+            {% for weather in weather_data %}
                 <tr>
-                    <td>{{ item["dt_txt"] }}</td>
-                    <td>High: {{ item["main"]["temp_max"] }}°F Low: {{ item["main"]["temp_min"] }}°F</td>
-                    <td>{{ item["main"]["humidity"] }}%</td>
-                    <td><div id="weather"><img src="https://openweathermap.org/img/w/{{ item["weather"][0]["icon"] }}.png"></img> {{ item["weather"][0]["main"] }}</div></td>
-                    <td>{{ '%.2f' % (item["wind"]["speed"]*3.6) }} mph</td>
+                    <td>{{ weather.dayname }}, {{ weather.date }}</td>
+                    <td>High: {{ weather.temp_max }}°F Low: {{ weather.temp_min }}°F</td>
+                    <td>{{ weather.humidity }}%</td>
+                    <td><div id="weather"><img src="https://openweathermap.org/img/w/{{ weather.icon }}.png"></img> {{ weather.main }}</div></td>
+                    <td>{{ '%.2f' % (weather.wind) }} mph</td>
                 </tr>
             {% endfor %}
         </table>
