@@ -1,9 +1,15 @@
 services:
-  app:
+  weather_api:
     build: .
     container_name: weather-api
-    command: flask run --host "0.0.0.0" --port 80 --reload
+    command: flask run --host "0.0.0.0" --port 8080 --reload
     ports:
-      - 8080:80
+      - 8080:8080
     volumes:
       - .:/app
+    networks:
+      - day_planner_planner_network
+
+networks:
+  day_planner_planner_network:
+    external: true
