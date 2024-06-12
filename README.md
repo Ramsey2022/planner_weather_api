@@ -1,5 +1,5 @@
 # Weather API
-Weather API that pulls weather data from OpenWeatherMap
+Weather API built with Flask that pulls weather data from OpenWeatherMap
 
 ## Features
 - Docker-compose dev environment that updates upon changes
