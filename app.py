@@ -66,11 +66,7 @@ def get_weather():
         }
         weather_data.append(weather)
 
-    return render_template(
-        "index.html",
-        title="Weather Forecast",
-        weather_data=weather_data,
-    )
+    return jsonify(weather_data)
 
 
 if __name__ == "__main__":
