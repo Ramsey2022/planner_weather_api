@@ -1,11 +1,13 @@
-from flask import Flask, render_template, request, abort, Response, jsonify
+from flask import Flask, request, Response, jsonify
 from dotenv import load_dotenv
 from datetime import datetime
 import json
 import urllib
 import os
+import googlemaps
 
 load_dotenv(".env")
+API_KEY = os.getenv("google_map_key")
 
 app = Flask(__name__)
 
@@ -20,22 +22,21 @@ def health():
     return jsonify(dict(status="OK")), 200
 
 
-@app.route("/forecast", methods=["GET"])
+@app.route("/forecast", methods=["GET", "POST"])
 def get_weather():
-    # city = request.args.get("city")
-    # state = request.args.get("state")
+    json_data = request.get_json()
 
-    # if city is None:
-    # abort(400, "Missing city argument")
-
-    # if state is None:
-    # abort(400, "Missing state argument")
-
+    # googlemaps geocoder for lat/lon + current date
+    gmaps = googlemaps.Client(key=API_KEY)
+    geocode_results = gmaps.geocode(json_data["postal_code"])
+    lats = geocode_results[0]["geometry"]["location"]["lat"]
+    lons = geocode_results[0]["geometry"]["location"]["lng"]
     datenow = datetime.now().date()
 
+    # data params for weather api url
     data = {}
-    data["lat"] = "45.516022"
-    data["lon"] = "-122.681427"
+    data["lat"] = lats
+    data["lon"] = lons
     data["date"] = datenow
     data["appid"] = os.getenv("WEATHER_API_KEY")
     data["units"] = "imperial"
