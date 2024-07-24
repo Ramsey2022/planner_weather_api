@@ -14,4 +14,4 @@ Weather API built with Flask that pulls weather data from OpenWeatherMap
 
 # Demo
 <img src="img/planner_weather_demo.png" alt="weather api demo">
-<img src="img/planner_weather_tests.png" alt="weather pytest demo">
+<img src="img/flask_weather_tests.png" alt="weather pytest demo">
