@@ -14,16 +14,34 @@ app = Flask(__name__)
 
 @app.route("/")
 def root():
+    """
+    Returns a message for working server
+
+    Returns:
+        message: Server is running!
+    """
     return {"message": "Server is running."}
 
 
 @app.route("/health")
 def health():
+    """
+    Returns http status code in json
+
+    Returns:
+        if status = ok: return 200
+    """
     return jsonify(dict(status="OK")), 200
 
 
 @app.route("/forecast", methods=["GET", "POST"])
 def get_weather():
+    """
+    Takes in postal code with GET request to app, then using google Places API, geocode the postal code, search for weather via postal code using OpenWeather API, and finally return transformed data in a POST json response
+
+    Returns:
+        json: weather within acquired zipcode
+    """
     json_data = request.get_json()
 
     # googlemaps geocoder for lat/lon + current date
